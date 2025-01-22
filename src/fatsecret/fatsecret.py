@@ -513,6 +513,37 @@ class Fatsecret:
         response = self.session.get(self.api_url, params=params)
         return self.valid_response(response)
 
+    def food_categories_get(self, region=None, language=None):
+        """This is a utility method, returning the full list of all supported recipe type names."""
+
+        params = {"method": "food_categories.get.v2", "format": "json"}
+
+        if region:
+            params["region"] = region
+
+        if language:
+            params["language"] = language
+
+        response = self.session.get(self.api_url, params=params)
+        return self.valid_response(response)
+
+    def food_sub_categories_get(self, food_category_id=None, region=None, language=None):
+        """This is a utility method, returning the full list of all supported recipe type names."""
+
+        params = {"method": "food_sub_categories.get.v2", "format": "json"}
+
+        if food_category_id:
+            params["food_category_id"] = food_category_id
+
+        if region:
+            params["region"] = region
+
+        if language:
+            params["language"] = language
+
+        response = self.session.get(self.api_url, params=params)
+        return self.valid_response(response)
+
     def saved_meal_create(self, meal_name, meal_desc=None, meals=None):
         """Records a saved meal for the user according to the parameters specified.
 
