@@ -516,7 +516,7 @@ class Fatsecret:
     def food_categories_get(self, region=None, language=None):
         """This is a utility method, returning the full list of all supported recipe type names."""
 
-        params = {"method": "food_categories.get.v2", "format": "json"}
+        params = {"method": "food_categories.get", "format": "json"}
 
         if region:
             params["region"] = region
@@ -530,7 +530,7 @@ class Fatsecret:
     def food_sub_categories_get(self, food_category_id=None, region=None, language=None):
         """This is a utility method, returning the full list of all supported recipe type names."""
 
-        params = {"method": "food_sub_categories.get.v2", "format": "json"}
+        params = {"method": "food_sub_categories.get", "format": "json"}
 
         if food_category_id:
             params["food_category_id"] = food_category_id
