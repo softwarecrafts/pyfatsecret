@@ -284,6 +284,26 @@ class Fatsecret:
         response = self.session.get(self.api_url, params=params)
         return self.valid_response(response)
 
+    def food_get_v4(self, food_id, region=None, language=None):
+        """Returns detailed nutritional information for the specified food.
+
+        Use this call to display nutrition values for a food to users.
+
+        :param food_id: Fatsecret food identifier
+        :type food_id: str
+        """
+
+        params = {"method": "food.get.v4", "food_id": food_id, "format": "json"}
+
+        if region:
+            params["region"] = region
+
+        if language:
+            params["language"] = language
+
+        response = self.session.get(self.api_url, params=params)
+        return self.valid_response(response)
+
     def food_find_id_for_barcode(self, barcode, region=None, language=None):
         """Returns the food_id matching the barcode specified.
 
@@ -358,6 +378,10 @@ class Fatsecret:
         max_results=None,
         region=None,
         language=None,
+        include_sub_categories=False,
+        include_food_images=False,
+        include_food_attributes=False,
+        flag_default_serving=False,
     ):
         """Conducts a search of the food database using the search expression specified.
 
@@ -376,6 +400,10 @@ class Fatsecret:
             "method": "foods.search",
             "search_expression": search_expression,
             "format": "json",
+            "include_sub_categories": include_sub_categories,
+            "include_food_images": include_food_images,
+            "include_food_attributes": include_food_attributes,
+            "flag_default_serving": flag_default_serving,
         }
 
         if page_number and max_results:
