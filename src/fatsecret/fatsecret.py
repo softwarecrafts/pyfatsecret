@@ -196,6 +196,8 @@ class Fatsecret:
 
                 elif key in (
                     "food",
+                    "food_categories",
+                    "food_sub_categories",
                     "recipe",
                     "recipe_types",
                     "saved_meal_id",
