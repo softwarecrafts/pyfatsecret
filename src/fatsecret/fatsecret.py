@@ -377,6 +377,46 @@ class Fatsecret:
         page_number=None,
         max_results=None,
         region=None,
+        language=None
+    ):
+        """Conducts a search of the food database using the search expression specified.
+
+        The results are paginated according to a zero-based "page" offset. Successive pages of results
+        may be retrieved by specifying a starting page offset value. For instance, specifying a max_results
+        of 10 and page_number of 4 will return results numbered 41-50.
+
+        :param search_expression: term or phrase to search
+        :type search_expression: str
+        :param page_number: page set to return (default 0)
+        :type page_number: int
+        :param max_results: total results per page (default 20)
+        :type max_results: int
+        """
+        params = {
+            "method": "foods.search",
+            "search_expression": search_expression,
+            "format": "json",
+        }
+
+        if page_number and max_results:
+            params["page_number"] = page_number
+            params["max_results"] = max_results
+
+        if region:
+            params["region"] = region
+
+        if language:
+            params["language"] = language
+
+        response = self.session.get(self.api_url, params=params)
+        return self.valid_response(response)
+
+    def foods_search_v3(
+        self,
+        search_expression,
+        page_number=None,
+        max_results=None,
+        region=None,
         language=None,
         include_sub_categories=False,
         include_food_images=False,
@@ -397,7 +437,7 @@ class Fatsecret:
         :type max_results: int
         """
         params = {
-            "method": "foods.search",
+            "method": "foods.search.v3",
             "search_expression": search_expression,
             "format": "json",
             "include_sub_categories": include_sub_categories,
