@@ -159,7 +159,10 @@ class Fatsecret:
                     return response.json()[key]["food"]
 
                 elif key == "foods_search":
-                    return response.json()[key]["results"]["food"]
+                    results = response.json()[key]["results"]
+                    if results:
+                        return results["food"]
+                    return results
 
                 elif key == "suggestions":
                     return response.json()[key]
