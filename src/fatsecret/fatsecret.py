@@ -211,6 +211,8 @@ class Fatsecret:
                     "food_entry_id",
                 ):
                     return response.json()[key]
+                else:
+                    return response.json()
 
     def food_add_favorite(self, food_id, serving_id=None, number_of_units=None):
         """Add a food to a user's favorite according to the parameters specified.
@@ -383,7 +385,7 @@ class Fatsecret:
         page_number=None,
         max_results=None,
         region=None,
-        language=None
+        language=None,
     ):
         """Conducts a search of the food database using the search expression specified.
 
@@ -603,7 +605,9 @@ class Fatsecret:
         response = self.session.get(self.api_url, params=params)
         return self.valid_response(response)
 
-    def food_sub_categories_get(self, food_category_id=None, region=None, language=None):
+    def food_sub_categories_get(
+        self, food_category_id=None, region=None, language=None
+    ):
         """This is a utility method, returning the full list of all supported recipe type names."""
 
         params = {"method": "food_sub_categories.get", "format": "json"}
